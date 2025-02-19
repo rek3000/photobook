@@ -1,27 +1,31 @@
 'use client'
 
 import { useEffect } from "react"
-import initializeDatabase from "@/lib/db-init"
+import { initializeDatabase } from "@/lib/db-init"
+import { initializeStorage } from "@/lib/storage-init"
+
+interface ClientProviderProps {
+  children: React.ReactNode
+}
 
 export default function ClientProvider({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: ClientProviderProps) {
   useEffect(() => {
     const init = async () => {
       try {
-        const success = await initializeDatabase()
-        if (!success) {
-          console.error('Failed to initialize database')
-        }
-      } catch (err) {
-        console.error('Error during database initialization:', err)
+        await Promise.all([
+          initializeDatabase(),
+          initializeStorage()
+        ])
+        console.log('Initialization completed')
+      } catch (error) {
+        console.error('Initialization error:', error)
       }
     }
 
     init()
   }, [])
 
-  return children
+  return <>{children}</>
 }

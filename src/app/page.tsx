@@ -96,7 +96,7 @@ export default function Home() {
         {images.length === 0 ? (
           <div className="rounded-lg bg-white p-8 text-center shadow-lg">
             <p className="text-gray-600">
-              You haven't uploaded any images yet. Drop some files above to get started!
+              You haven&apos;t uploaded any images yet. Drop some files above to get started!
             </p>
           </div>
         ) : (

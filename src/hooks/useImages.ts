@@ -171,7 +171,7 @@ export const useImages = () => {
         return false
       }
 
-      const [userId, fileName] = pathParts
+      const [userId] = pathParts
       if (userId !== user.id) {
         console.error('Unauthorized: Cannot delete other users images')
         setError('Unauthorized')
